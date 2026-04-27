@@ -101,6 +101,43 @@ public class ConfigReader {
         return List.of(el.getAsString().trim());
     }
 
+    public static boolean isUseChromeUserProfile() {
+        if (config == null || !config.has("useChromeUserProfile")) {
+            return false;
+        }
+        return config.get("useChromeUserProfile").getAsBoolean();
+    }
+
+    /**
+     * Full path to Chrome "User Data" directory. Empty = default per OS (Windows: %LOCALAPPDATA%\\Google\\Chrome\\User Data).
+     */
+    public static String getChromeUserDataDir() {
+        if (config == null || !config.has("chromeUserDataDir")) {
+            return "";
+        }
+        return config.get("chromeUserDataDir").getAsString().trim();
+    }
+
+    /**
+     * Internal folder name under User Data, e.g. "Default", "Profile 1". When empty, use {@link #getChromeProfileDisplayName()}.
+     */
+    public static String getChromeProfileDirectory() {
+        if (config == null || !config.has("chromeProfileDirectory")) {
+            return "";
+        }
+        return config.get("chromeProfileDirectory").getAsString().trim();
+    }
+
+    /**
+     * Profile label as in the Chrome window, e.g. "Your Chrome" — used to look up the folder in Local State.
+     */
+    public static String getChromeProfileDisplayName() {
+        if (config == null || !config.has("chromeProfileDisplayName")) {
+            return "";
+        }
+        return config.get("chromeProfileDisplayName").getAsString().trim();
+    }
+
     /**
      * Get base URL from configuration
      * @return eBay base URL
