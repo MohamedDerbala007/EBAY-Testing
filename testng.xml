@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="eBay Test Suite" parallel="false">
+    <test name="eBay Search and Filter Tests">
+        <classes>
+            <class name="com.ebay.automation.tests.EbaySearchTest">
+                <methods>
+                    <include name="testEbaySearchAndFilter" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,41 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# IDE
+.classpath
+.project
+.settings/
+*.iml
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Project specific
+logs/
+screenshots/
+test-output/
+.allure/
+allure-results/
+
+# Compiled
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+
+# System
+.env
+.env.local

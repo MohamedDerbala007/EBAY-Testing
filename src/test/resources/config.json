@@ -1,0 +1,11 @@
+{
+  "browser": "chrome",
+  "baseUrl": "https://www.ebay.com/",
+  "searchTerm": "mazda mx-5",
+  "transmissionType": "Manual",
+  "windowWidth": 1920,
+  "windowHeight": 1080,
+  "implicitWait": 20,
+  "explicitWait": 20,
+  "pageLoadTimeout": 30
+}
