@@ -1,5 +1,11 @@
 {
   "browser": "chrome",
+  "useInstalledChrome": true,
+  "chromeBinaryPath": "",
+  "chromeVersion": "146",
+  "chromeDriverPath": "",
+  "useSofRevampProjectChromeDriver": true,
+  "sofRevampProjectPath": ["../../SofRevampAutomation", "../SofRevampAutomation"],
   "baseUrl": "https://www.ebay.com/",
   "searchTerm": "mazda mx-5",
   "transmissionType": "Manual",

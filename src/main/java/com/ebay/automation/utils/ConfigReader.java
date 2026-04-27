@@ -1,9 +1,13 @@
 package com.ebay.automation.utils;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ConfigReader class for reading external JSON configuration file
@@ -32,6 +36,69 @@ public class ConfigReader {
      */
     public static String getBrowser() {
         return config.get("browser").getAsString();
+    }
+
+    /**
+     * If true, ChromeOptions points at normal installed Google Chrome (not Chrome for Testing).
+     */
+    public static boolean isUseInstalledChrome() {
+        if (config == null || !config.has("useInstalledChrome")) {
+            return true;
+        }
+        return config.get("useInstalledChrome").getAsBoolean();
+    }
+
+    /**
+     * Optional full path to chrome.exe. When blank, DriverFactory auto-detects default install locations.
+     */
+    public static String getChromeBinaryPath() {
+        if (config == null || !config.has("chromeBinaryPath")) {
+            return "";
+        }
+        return config.get("chromeBinaryPath").getAsString().trim();
+    }
+
+    /**
+     * Optional Chrome version for WebDriverManager, e.g. "146" or "146.0.7680.165".
+     * When empty, the version is read from the Chrome binary (chrome --version).
+     */
+    public static String getChromeVersionOverride() {
+        if (config == null || !config.has("chromeVersion")) {
+            return "";
+        }
+        return config.get("chromeVersion").getAsString().trim();
+    }
+
+    /** Explicit chromedriver.exe path (absolute or relative to the working directory). Empty = try SofRevamp / automatic. */
+    public static String getChromeDriverPath() {
+        if (config == null || !config.has("chromeDriverPath")) {
+            return "";
+        }
+        return config.get("chromeDriverPath").getAsString().trim();
+    }
+
+    public static boolean isUseSofRevampProjectChromeDriver() {
+        if (config == null || !config.has("useSofRevampProjectChromeDriver")) {
+            return true;
+        }
+        return config.get("useSofRevampProjectChromeDriver").getAsBoolean();
+    }
+
+    /** Relative path(s) from the process working directory to the SofRevampAutomation project root. */
+    public static List<String> getSofRevampProjectPathCandidates() {
+        if (config == null || !config.has("sofRevampProjectPath")) {
+            return List.of("../../SofRevampAutomation", "../SofRevampAutomation");
+        }
+        JsonElement el = config.get("sofRevampProjectPath");
+        if (el.isJsonArray()) {
+            JsonArray arr = el.getAsJsonArray();
+            List<String> out = new ArrayList<>();
+            for (JsonElement e : arr) {
+                out.add(e.getAsString().trim());
+            }
+            return out.isEmpty() ? List.of("../../SofRevampAutomation", "../SofRevampAutomation") : out;
+        }
+        return List.of(el.getAsString().trim());
     }
 
     /**
